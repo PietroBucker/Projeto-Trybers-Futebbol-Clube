@@ -19,7 +19,6 @@ class App {
       res.header('Access-Control-Allow-Headers', '*');
       next();
     };
-    
 
     this.app.use(express.json());
     this.app.use(accessControl);

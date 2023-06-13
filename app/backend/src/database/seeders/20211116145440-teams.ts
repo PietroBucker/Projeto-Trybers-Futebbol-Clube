@@ -54,7 +54,7 @@ export default {
           team_name: 'São Paulo',
         },
       ],
-      {},
+      {      },
     );
   },
 
