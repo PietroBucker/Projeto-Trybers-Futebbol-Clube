@@ -1,10 +1,10 @@
-import { CreateOptions, DataTypes,
+import { CreationOptional, DataTypes,
   InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import db from '.';
 
 class SequelizeTeam extends Model<InferAttributes<SequelizeTeam>,
 InferCreationAttributes<SequelizeTeam>> {
-  declare id: CreateOptions<number>;
+  declare id: CreationOptional<number>;
 
   declare teamName: string;
 }
