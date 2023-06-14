@@ -1,3 +1,4 @@
 export interface IModel<T> {
-  getAll(): Promise<T[]>;
+  findAll(): Promise<T[]>;
+  findById(id: number): Promise<T | null>;
 }
