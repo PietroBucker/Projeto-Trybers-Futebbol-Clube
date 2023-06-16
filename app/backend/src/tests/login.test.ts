@@ -22,11 +22,10 @@ describe('testa rota post login', () => {
   it('teste integraçao rota post login', async () => {
     sinon.stub(Token, 'createToken').resolves(tokenValidAdmin)
     const httpResponse = await chai.request(app).post('/login').send(loginMockValid)
-    sinon.stub(jwt, 'sign').resolves('teste')
 
     expect(httpResponse.status).to.be.equal(200);
     expect(httpResponse.body).to.be.deep.equal({ token: tokenValidAdmin});
-
+    
   });
 
   it('teste de integraçao login sem email', async () => {
@@ -58,6 +57,12 @@ describe('testa rota post login', () => {
     const httpResponse = await chai.request(app).post('/login').send(loginMockInvlidPassword)
     expect(httpResponse.status).to.be.equal(401);
     expect(httpResponse.body).to.be.deep.equal(erroInvalidField);
+  });
+
+  it('testando CreateToken', async () => {
+    const httpResponse = await chai.request(app).post('/login').send(loginMockValid)
+
+    expect(httpResponse.status).to.be.equal(200);
   });
 });
 
