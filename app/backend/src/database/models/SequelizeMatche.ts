@@ -15,7 +15,7 @@ InferCreationAttributes<SequelizeMatche>> {
 
   declare awayTeamGoals: number;
 
-  declare inProgress: number;
+  declare inProgress: boolean;
 }
 
 SequelizeMatche.init({
@@ -28,6 +28,8 @@ SequelizeMatche.init({
   homeTeamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
     references: {
       model: 'teams',
       key: 'id',
@@ -40,6 +42,8 @@ SequelizeMatche.init({
   awayTeamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
     references: {
       model: 'teams',
       key: 'id',
@@ -60,10 +64,10 @@ SequelizeMatche.init({
   underscored: true,
 });
 
-SequelizeMatche.belongsTo(SequelizeTeam, { foreignKey: 'homeTeamId' });
-SequelizeMatche.belongsTo(SequelizeTeam, { foreignKey: 'awayTeamId' });
+SequelizeMatche.belongsTo(SequelizeTeam, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+SequelizeMatche.belongsTo(SequelizeTeam, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
-SequelizeTeam.hasMany(SequelizeMatche, { foreignKey: 'homeTeamId' });
-SequelizeTeam.hasMany(SequelizeMatche, { foreignKey: 'awayTeamId' });
+SequelizeTeam.hasMany(SequelizeMatche, { foreignKey: 'homeTeamId', as: 'homeTeam' });
+SequelizeTeam.hasMany(SequelizeMatche, { foreignKey: 'awayTeamId', as: 'awayTeam' });
 
 export default SequelizeMatche;

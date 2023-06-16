@@ -5,4 +5,5 @@ export interface IMatche {
   awayTeamId: number,
   awayTeamGoals: number,
   inProgress: boolean,
+
 }
