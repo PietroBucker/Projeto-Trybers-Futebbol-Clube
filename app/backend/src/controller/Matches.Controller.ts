@@ -6,16 +6,14 @@ class MatchesController {
     private matchesService = new MatchesService(),
   ) {}
 
-  async findAll(req: Request, res: Response): Promise<Response> {
-    const { status, data } = await this.matchesService.findAll();
-    return res.status(status).json(data);
-  }
-
   async findAllInProgress(req: Request, res: Response): Promise<Response> {
     const { inProgress } = req.query;
-
-    const { status, data } = await this.matchesService
-      .findAllInProgress(inProgress !== 'false');
+    if (inProgress) {
+      const { status, data } = await this.matchesService
+        .findAllInProgress(inProgress !== 'false');
+      return res.status(status).json(data);
+    }
+    const { status, data } = await this.matchesService.findAll();
     return res.status(status).json(data);
   }
 

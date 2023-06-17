@@ -8,14 +8,7 @@ const matchesController = new MatchesController();
 
 matchRoute.get(
   '/',
-  ValidateToken.validation,
   (req: Request, res: Response) => matchesController.findAllInProgress(req, res),
-);
-
-matchRoute.get(
-  '/',
-  ValidateToken.validation,
-  (req: Request, res: Response) => matchesController.findAll(req, res),
 );
 
 matchRoute.patch(
