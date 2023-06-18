@@ -27,16 +27,9 @@ class MatchesModel implements IMatcheModel<IMatche> {
     return dbData;
   }
 
-  async findById(id: number): Promise<IMatche | null> {
-    const dbData = await this.model.findOne({ where: { id } });
-    if (dbData === null) {
-      return null;
-    }
-    return dbData;
-  }
-
   async finishingUpdate(id: number): Promise<{ message: string } | null> {
-    const [affectedCount] = await this.model.update({ inProgress: true }, { where: { id } });
+    const [affectedCount] = await this.model.update({ inProgress: false }, { where: { id } });
+    console.log(affectedCount);
 
     if (affectedCount === 0) {
       return null;
@@ -55,13 +48,17 @@ class MatchesModel implements IMatcheModel<IMatche> {
     return body;
   }
 
-  async createMatches(body: IMatche): Promise<IMatche | null> {
-    const dbData = await this.model.create(body);
-    console.log(dbData);
-    if (!dbData) {
-      return null;
+  async createMatches(body: IMatche): Promise<IMatche | string> {
+    try {
+      const dbData = await this.model.create({ ...body, inProgress: true });
+      return dbData;
+    } catch (error) {
+      const { name } = error as Error;
+      if (name === 'SequelizeForeignKeyConstraintError') {
+        return 'There is no team with such id!';
+      }
+      return 'create Error';
     }
-    return dbData;
   }
 }
 

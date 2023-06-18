@@ -7,7 +7,7 @@
 //     DELETED: 204,
 export type ServiceMessage = { message: string };
 
-type ServiceResponseErrorType = 400 | 401 | 404;
+type ServiceResponseErrorType = 400 | 401 | 404 | 417;
 
 export type ServiceResponseError = {
   status: ServiceResponseErrorType,
@@ -15,7 +15,7 @@ export type ServiceResponseError = {
 };
 
 export type ServiceResponseSuccess<T> = {
-  status: 200,
+  status: 200 | 201,
   data: T
 };
 

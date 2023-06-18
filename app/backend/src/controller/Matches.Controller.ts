@@ -17,14 +17,14 @@ class MatchesController {
     return res.status(status).json(data);
   }
 
-  async findById(req: Request, res: Response): Promise<Response> {
-    const { id } = req.params;
-    const { status, data } = await this.matchesService.findById(Number(id));
-    if (status !== 200) {
-      return res.status(status).json(data);
-    }
-    return res.status(status).json(data);
-  }
+  // async findById(req: Request, res: Response): Promise<Response> {
+  //   const { id } = req.params;
+  //   const { status, data } = await this.matchesService.findById(Number(id));
+  //   if (status !== 200) {
+  //     return res.status(status).json(data);
+  //   }
+  //   return res.status(status).json(data);
+  // }
 
   async finishingUpdate(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
@@ -48,7 +48,7 @@ class MatchesController {
   async createMatches(req: Request, res: Response): Promise<Response> {
     const { token, ...body } = req.body;
     const { status, data } = await this.matchesService.createMatches(body);
-    if (status !== 200) {
+    if (status !== 201) {
       return res.status(status).json(data);
     }
     return res.status(status).json(data);

@@ -12,9 +12,10 @@ export type ResolvesTeamGoals = {
   awayTeamGoals: number,
 };
 
-export interface IMatcheModel<T> extends IModel<T> {
+export interface IMatcheModel<T> {
+  findAll(): Promise<T[]>;
   findAllInProgress(inProgress: boolean): Promise<T[]>;
   finishingUpdate(id: number): Promise<{ message: string } | null>
   updateMatches(id: number, body: ResolvesTeamGoals): Promise< ResolvesTeamGoals | null>
-  createMatches(body: T): Promise<T | null>;
+  createMatches(body: T): Promise<T | string>;
 }

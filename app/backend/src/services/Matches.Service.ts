@@ -18,13 +18,13 @@ class MatchesService {
     return { status: 200, data: modelResponse };
   }
 
-  async findById(id: IMatche['id']): Promise<ServiceResponse<IMatche>> {
-    const modelResponse = await this.matchesModel.findById(id);
-    if (modelResponse === null) {
-      return { status: 404, data: { message: 'not found' } };
-    }
-    return { status: 200, data: modelResponse };
-  }
+  // async findById(id: IMatche['id']): Promise<ServiceResponse<IMatche>> {
+  //   const modelResponse = await this.matchesModel.findById(id);
+  //   if (modelResponse === null) {
+  //     return { status: 404, data: { message: 'not found' } };
+  //   }
+  //   return { status: 200, data: modelResponse };
+  // }
 
   async finishingUpdate(id: number): Promise<ServiceResponse<{ message: string }>> {
     const modelResponse = await this.matchesModel
@@ -42,17 +42,17 @@ class MatchesService {
   ): Promise<ServiceResponse<ResolvesTeamGoals>> {
     const modelResponse = await this.matchesModel.updateMatches(id, body);
     if (modelResponse === null) {
-      return { status: 404, data: { message: 'not found' } };
+      return { status: 417, data: { message: 'not update' } };
     }
     return { status: 200, data: modelResponse };
   }
 
   async createMatches(body: IMatche): Promise<ServiceResponse<ResolvesTeamGoals>> {
     const modelResponse = await this.matchesModel.createMatches(body);
-    if (modelResponse === null) {
-      return { status: 404, data: { message: 'create Error' } };
+    if (typeof modelResponse === 'string') {
+      return { status: 404, data: { message: modelResponse } };
     }
-    return { status: 200, data: modelResponse };
+    return { status: 201, data: modelResponse };
   }
 }
 
