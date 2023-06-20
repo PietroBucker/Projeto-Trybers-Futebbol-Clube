@@ -27,7 +27,6 @@ class LeaderBoardService {
     LeaderBoardService.home = modelResponse
       .map((el) => LeaderBoardService.leaderBoardGenerate(el, 'home'));
     LeaderBoardService.agroup('home');
-
     return { status: 200, data: LeaderBoardService.home };
   }
 
